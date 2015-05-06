@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>The Hunger Man Apps</title>
+		<!-- Loading CSS --> 
+		<link href="css/jquery.mobile-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/jquery.mobile.theme-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/jquery.mobile.icons-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/jquery.mobile.external-png-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/jquery.mobile.inline-png-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/jquery.mobile.structure-1.4.5.css" type="text/css" rel="stylesheet" />
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<!-- Loading Javascript -->
+		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="js/jquery.jcryption.3.1.0.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	</head>
+	<body>
+		<div class="loader" id="loader">
+			Checking Secure Connection. Please Wait ...
+		</div>
+		<div class="ui-body-e hidden" id="main-application">
+			<div data-role="page" id="home">
+				<div data-role="header">
+					<a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open Left Panel</a>
+					<h1>The Hungry Man</h1>
+					<a href="#right-panel" data-icon="gear" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open Left Panel</a>
+				</div>
+				<div data-role="content">
+					Selamat Datang di Aplikasi "Hungry Man 1.0 Beta", Aplikasi ini digunakan untuk melakukan pencarian, dan pemesanan makanan dari restoran terdekat,
+					Pilihlah menu berikut ini :
+					<ul data-role="listview" data-inset="true">
+						<li><a href="#map-page" data-transition="slide">Check Lokasi</a></li>
+						<li><a href="#search" data-transition="flip">Cari Restoran</a></li>
+						<li><a href="#order" data-transition="flow">Pesan Makanan</a></li>
+						<li><a href="#about" data-transition="fade">About</a></li>
+						<li><a href="#login" data-transition="slide">Login</a></li>
+						<li><a href="#without" data-transition="slide">Crypt Without Form</a></li>
+					</ul>
+				</div>
+				
+				<!-- Panel Declaration -->
+				<div data-role="panel" id="left-panel" class="ui-responsive-panel">
+					<h4>Extra Menu</h4>
+					<div data-role="collapsible-set" data-content-theme="d">
+						<div data-role="collapsible">
+							<h3>Section 1</h3>
+							<ul data-role="listview" data-inset="true">
+								<li><a href="http://google.com">Open Google.com</a></li>
+								<li><a href="#">Test Menu 2</a></li>
+								<li><a href="#">Test Menu 3</a></li>
+								<li><a href="#">Test Menu 4</a></li>
+								<li><a href="#">Test Menu 5</a></li>
+							</ul>
+						</div>
+						<div data-role="collapsible">
+							<h3>Section 2</h3>
+							<p>Ini detail dari Section 2</p>
+						</div>
+						<div data-role="collapsible">
+							<h3>Section 3</h3>
+							<p>Ini detail dari Section 3</p>
+						</div>
+						<div data-role="collapsible">
+							<h3>Section 4</h3>
+							<p>Ini detail dari Section 4</p>
+						</div>
+					</div>
+					<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close Panel</a>
+				</div>
+				<div data-role="panel" id="right-panel" data-display="push" data-position="right" class="ui-responsive-panel">
+					<p>Ini Push Panel Kanan</p>
+					<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close Panel</a>
+				</div>
+				<!-- End Panel -->
+			</div>
+			
+			<div data-role="page" id="map-page" data-url="map-page">
+				<style>
+					
+				</style>
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext"></a>
+					<h1>Check Location</h1>
+					<a href="#map_detail_panel" data-icon="grid">Daftar Tempat</a>
+				</div>
+				<div role="main" class="ui-content" id="map-canvas">
+				
+				</div>
+				<div data-role="content" id="description">
+					Latitude : <span id="latitude"></span>
+					Longitude : <span id="longitude"></span>
+				</div>
+				
+
+				<div data-role="panel" id="map_detail_panel" data-display="push" data-position="right" class="ui-responsive-panel">
+					<form>
+						<input type="text" id="searchRestoPanel" placeholder="Type For Search" data-type="search" />
+					</form>
+					<ul id="resto_list_panel" data-role="listview" data-inset="true" data-filter="true" data-input="#searchRestoPanel">
+						
+					</ul>
+				</div>
+
+			</div>
+			
+			<div data-role="page" id="search">
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon='arrow-l' data-iconpos="notext"></a>
+					<h1>Cari Restoran</h1>
+				</div>
+				<div data-role="content">
+					<form>
+						<input type="text" id="searchResto" placeholder="Type For Search" data-type="search" />
+					</form>
+					<ul id="resto_list" data-role="listview" data-inset="true" data-filter="true" data-input="#searchResto">
+						<script type="text/javascript">
+							$.getJSON("resto.php",function(datajson){
+								$.each(datajson,function(i,item){
+									$("#resto_list").append("<li><a id='"+item.id+"' class='orderbylist' href='#order' data-transition='flip'>"+item.id+" - "+item.name+"</a></li>");
+								});
+							});
+						</script>
+					</ul>
+				</div>
+			</div>
+			
+			<div data-role="page" id="order">
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext"></a>
+					<h1>Order Makanan</h1>
+				</div>
+				<div data-role="content">
+					
+				</div>
+			</div>
+			
+			<div data-role="page" id="about">
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext"></a>
+					<h1>About Us</h1>
+				</div>
+				<div data-role="content">
+					<div class="about">
+						Hungry Man Version 1.0 Beta <br />
+						Copyright &copy; Saddam Rajief 2015 <br />
+						Legal & Term Agreement <a href="legal.html">click here</a>
+					</div>
+				</div>
+				<div data-role="footer">
+					<h3>Created By : Saddam Rajief</h3>
+				</div>
+			</div>
+			<div data-role="page" id="login">
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext"></a>
+					<h1>Form Enkripsi</h1>
+				</div>
+				<div data-role="content">
+					<form action="datapost.php" method="POST" id="formPost">
+						<div>
+							<label for="f_USERID">User ID : </label>
+							<input type="text" name="f_USERID" id="f_USERID" placeholder="Input Your User ID" />
+						</div>
+						<div>
+							<label for="f_PASSWD">Password : </label>
+							<input type="password" name="f_PASSWD" id="f_PASSWD" placeholder="Input Your Password" />
+						</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"><button type="submit" data-icon="check" data-theme="b">Submit</button></div>
+							<div class="ui-block-b"><button type="reset" data-icon="delete" data-theme="e">Reset</button></div>
+						</div>
+					</form>
+					<div id="login-result" class="login-result">
+						
+					</div>
+				</div>
+			</div>
+			<div data-role="page" id="without">
+				<div data-role="header">
+					<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext"></a>
+					<h1>Encrypt Without Form</h1>
+				</div>
+				<div data-role="content">
+					<div id="data-input">
+						<div>
+							<label for="f_NIM">NIM : </label>
+							<input type="text" name="f_NIM" id="f_NIM" placeholder="Ketikkan NIM Anda" />
+						</div>
+						<div>
+							<label for="f_NAME">Nama : </label>
+							<input type="text" name="f_NAME" id="f_NAME" placeholder="Ketikkan Nama Anda" />
+						</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"><button id="btn_send" type="button" data-icon="check" data-theme="b">Submit</button></div>
+							<div class="ui-block-b"><button type="reset" data-icon="delete" data-theme="e">Reset</button></div>
+						</div>
+					</div>
+					<div id="crypt-result" class="crypt-result">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			/*
+			 * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
+			 * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
+			 */
+			var latitude = 34.0983425;
+			var longitude = -118.3267434;
+			
+			$( document ).on("pageinit","#map-page", function() {
+				var defaultLatLng = new google.maps.LatLng(latitude, longitude);  // Default to Hollywood, CA when no geolocation support
+				
+				if ( navigator.geolocation ) {
+					function success(pos) {
+						// Location found, show map with these coordinates
+						// drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+						latitude = pos.coords.latitude;
+						longitude = pos.coords.longitude;
+						setLatLng(pos.coords.latitude,pos.coords.longitude);
+						drawMapPlace(pos.coords.latitude,pos.coords.longitude);
+					}
+					function fail(error) {
+						drawMap(defaultLatLng);  // Failed to find location, show default map
+						setLatLng(latitude,longitude);
+						drawMapPlace(latitude,longitude);
+					}
+					// Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
+					navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+					
+				} else {
+					drawMap(defaultLatLng);  // No geolocation support, show default map
+				}
+				
+				function drawMap(latlng) {
+					var myOptions = {
+						zoom: 17,
+						center: latlng,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+					// Add an overlay to the map of current lat/lng
+					var marker = new google.maps.Marker({
+						position: latlng,
+						map: map,
+						title: "Greetings!"
+					});
+				}
+				
+				function setLatLng(Lat,Lng){
+					latitude = Lat;
+					longitude = Lng;
+					$("#latitude").html(latitude);
+					$("#longitude").html(longitude);
+				}
+				// Google Map place
+				function drawMapPlace(latitude,longitude){
+					var map;
+					var infowindow;
+					function initialize() {
+					  var pyrmont = new google.maps.LatLng(latitude, longitude);
+
+					  map = new google.maps.Map(document.getElementById('map-canvas'), {
+						center: pyrmont,
+						zoom: 17,
+					  });
+
+					  var request = {
+						location: pyrmont,
+						radius: 500,
+						types: ['restaurant']
+					  };
+						var marker = new google.maps.Marker({
+							position: pyrmont,
+							map: map,
+							title: "Lokasi Anda Disini",
+							animation: google.maps.Animation.BOUNCE
+						});
+					  infowindow = new google.maps.InfoWindow();
+					  var service = new google.maps.places.PlacesService(map);
+					  service.nearbySearch(request, callback);
+					}
+					
+					function callback(results, status) {
+					  if (status == google.maps.places.PlacesServiceStatus.OK) {
+						for (var i = 0; i < results.length; i++) {
+							$("#resto_list_panel").append("<li><a id='"+results[i].id+"' class='orderbylist' href='#order' data-transition='flip'>"+results[i].name+"</a></li>").listview('refresh');
+							//onsole.log(results[i]);
+						  createMarker(results[i]);
+						}
+					  }
+					}
+
+					function createMarker(place) {
+					  var placeLoc = place.geometry.location;
+					  var marker = new google.maps.Marker({
+						map: map,
+						position: place.geometry.location
+					  });
+
+					  google.maps.event.addListener(marker, 'click', function() {
+						console.log(place);
+						infowindow.setContent(place.name);
+						infowindow.open(map, this);
+					  });
+					}
+
+					// google.maps.event.addDomListener(window, 'load', initialize);
+					initialize();
+				}
+				// End Google Map Place
+			});
+			
+			$(document).on( "pageinit", "#home", function() {
+			    $( document ).on( "swipeleft swiperight", "#home", function( e ) {
+			        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+			            if ( e.type === "swipeleft"  ) {
+			                $( "#right-panel" ).panel( "open" );
+			            } else if ( e.type === "swiperight" ) {
+			                $( "#left-panel" ).panel( "open" );
+			            }
+			        }
+			    });
+			});
+			$(document).on("pageload","#login",function(){
+				$("#login-result").hide();
+			});
+			
+			$(document).on( "pageinit", "#about", function() {
+			    $( document ).on( "swipeleft swiperight", "#about", function( e ) {
+			        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+			            if ( e.type === "swiperight"  ) {
+			                $(this).find("[data-rel=back]").click();
+			            }
+			        }
+			    });
+			});
+			$(function(){
+				// Validate The Encryption Libraries
+				var password = $.jCryption.encrypt("XXXX", "turbo");
+				$.jCryption.authenticate(password, "jcryption.php?getPublicKey=true", "jcryption.php?handshake=true", function(AESKey) {
+					$("#loader").fadeOut();
+					$("#main-application").fadeIn();
+				}, function() {
+					$("#loader").html("Scure Connection Failed, Restart Application");
+				});
+				
+				// Form Encryption
+				$("#formPost").jCryption();
+				$("#formPost").submit(function(){
+					var datapost = $(this).serialize();
+					var target = "datapost.php";
+					$.post(target,datapost,function(e){
+						var json_result = $.jCryption.decrypt(e, "KEY");
+						$("#login-result").html(json_result);
+						var parse_result = jQuery.parseJSON(json_result);
+						alert("Message : " + parse_result.msg);
+						alert("Status : " + parse_result.status);
+					});
+					return false;
+				});
+				
+				$("#btn_send").click(function(){
+					var toEncrypt = "f_NIM="+$("#f_NIM").val()+"&f_NAME="+$("#f_NAME").val();
+					var encryptedString = $.jCryption.encrypt(toEncrypt, password);
+					
+					var target = "withoutform.php";
+					var datapost = {
+						'jCryption' : encryptedString
+					}
+					$.post(target,datapost,function(e){
+						var json_result = $.jCryption.decrypt(e, "KEY");
+						$("#crypt-result").html(json_result);
+						var parse_result = jQuery.parseJSON(json_result);
+						alert("Message : " + parse_result.msg);
+						alert("Status : " + parse_result.status);
+						//$("#crypt-result").html(e);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
